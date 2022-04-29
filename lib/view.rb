@@ -21,16 +21,25 @@ class View
     end
   end
 
-  def delete_gossip(gossip_array)
+  def header_deleter_gossip(gossip_array)
     puts "Quel message veux tu supprimer ?"
     gossip_array.each.with_index {|gossip,i| puts "#{i+1} - #{gossip.content} (by #{gossip.author})"}
     puts "N - Ne rien supprimer"
     print "->"
+  end
+
+  def input_reasker()
+    puts "Entre une valeur correcte :"
+    print "->"
+    input = gets.chomp
+    return input
+  end
+
+  def delete_gossip(gossip_array)
+    header_deleter_gossip(gossip_array)
     input = gets.chomp
     until (input.to_i >= 1 && input.to_i <= gossip_array.size) || input.upcase == "N"
-      puts "Entre une valeur correcte :"
-      print "->"
-      input = gets.chomp
+      input = input_reasker()
     end
     input == "N" ? (return nil) : (return gossip_array[input.to_i - 1])
   end

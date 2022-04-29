@@ -1,4 +1,4 @@
-require 'gossip'
+#require 'gossip'
 
 class Controller
   def initialize()
