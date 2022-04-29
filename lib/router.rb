@@ -1,4 +1,3 @@
-require 'controller'
 
 class Router
   def initialize()

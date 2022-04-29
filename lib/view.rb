@@ -13,7 +13,9 @@ class View
   end
 
   def index_gossips(gossip_array)
+    puts " "
     puts "Voici les gossips du moment :"
+    puts "-" * 50
     gossip_array.each do |gossip|
       puts "Gossip de #{gossip.author} :"
       puts gossip.content
