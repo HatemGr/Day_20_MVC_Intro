@@ -1,5 +1,4 @@
 require 'gossip'
-require 'view'
 
 class Controller
   def initialize()
@@ -13,11 +12,13 @@ class Controller
   end
 
   def index_gossips()
-    file = Gossip.fetch_gossips
-    @view.index_gossips(file)
+    gossip_array = Gossip.all
+    @view.index_gossips(gossip_array)
   end
 
   def delete_gossip()
-    return true
+    gossip_array = Gossip.all
+    gossip_to_delete = @view.delete_gossip(gossip_array)
+    gossip_to_delete.nil? ? (puts "Suppression annulée") : gossip_to_delete.delete_gossip
   end
 end

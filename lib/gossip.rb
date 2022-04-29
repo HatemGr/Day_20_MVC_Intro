@@ -1,12 +1,12 @@
 require 'pry'
 require 'csv'
 
+
 class Gossip
-  @@gossip_list = []
+  attr_accessor :author, :content
   def initialize(author,content)
-    @content = content
     @author = author
-    @@gossip_list << self
+    @content = content
   end
 
   def save
@@ -15,9 +15,19 @@ class Gossip
     end
   end
 
-  def self.fetch_gossips
+  def delete_gossip
     file = CSV.read("db/gossip.csv")
-    return file
+    file.delete([@author,@content])
+    CSV.open("db/gossip.csv","w") do |csv|
+      file.each{|row| csv << row}
+    end
+  end
+
+  def self.all
+    file = CSV.read("db/gossip.csv")
+    gossip_array = []
+    file.each {|gossip| gossip_array << Gossip.new(gossip[0],gossip[1])}
+    return gossip_array
   end
 
 end
